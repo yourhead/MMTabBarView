@@ -291,14 +291,8 @@ StaticImage(SierraTabNewPressed)
         [bezier lineToPoint:NSMakePoint(NSMinX(aRect), NSMaxY(aRect))];
     }
     
-    BOOL shouldDisplayRightDivider = [button shouldDisplayRightDivider];
-    if (([button tabState] & (MMTab_PositionRightMask)))
-        shouldDisplayRightDivider = NO;
-    
-    if (shouldDisplayRightDivider) {
-        [bezier moveToPoint:NSMakePoint(NSMaxX(aRect), NSMinY(aRect))];
-        [bezier lineToPoint:NSMakePoint(NSMaxX(aRect), NSMaxY(aRect))];
-    }
+    [bezier moveToPoint:NSMakePoint(NSMaxX(aRect), NSMinY(aRect))];
+    [bezier lineToPoint:NSMakePoint(NSMaxX(aRect), NSMaxY(aRect))];
     [bezier stroke];
 }
 
