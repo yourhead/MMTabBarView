@@ -17,7 +17,7 @@
 		005DE6241EA419350010F9CE /* SierraTabNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE6181EA419350010F9CE /* SierraTabNew@2x.png */; };
 		005DE6251EA419350010F9CE /* SierraTabNewPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE6191EA419350010F9CE /* SierraTabNewPressed.png */; };
 		005DE6261EA419350010F9CE /* SierraTabNewPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE61A1EA419350010F9CE /* SierraTabNewPressed@2x.png */; };
-		005DE6271EA419350010F9CE /* MMSierraTabStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 005DE61B1EA419350010F9CE /* MMSierraTabStyle.h */; };
+		005DE6271EA419350010F9CE /* MMSierraTabStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 005DE61B1EA419350010F9CE /* MMSierraTabStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		005DE6281EA419350010F9CE /* MMSierraTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 005DE61C1EA419350010F9CE /* MMSierraTabStyle.m */; };
 		0634EFD91609FC4C00A6C86A /* MMAttachedTabBarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0634EFD81609FC4C00A6C86A /* MMAttachedTabBarButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0634EFDC1609FC6300A6C86A /* MMAttachedTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0634EFDB1609FC6300A6C86A /* MMAttachedTabBarButton.m */; };
@@ -801,6 +801,7 @@
 				06C9569F1C984932000AAF9D /* MMYosemiteTabStyle.h in Headers */,
 				0634F01E1609FC7F00A6C86A /* MMTabDragWindow.h in Headers */,
 				0634F0201609FC7F00A6C86A /* MMTabDragWindowController.h in Headers */,
+				005DE6271EA419350010F9CE /* MMSierraTabStyle.h in Headers */,
 				0634F0221609FC7F00A6C86A /* MMTabPasteboardItem.h in Headers */,
 				0634F0241609FC7F00A6C86A /* MMTabStyle.h in Headers */,
 				0634F0351609FD9000A6C86A /* MMAdiumTabStyle.h in Headers */,
@@ -809,7 +810,6 @@
 				0634F03B1609FD9000A6C86A /* MMLiveChatTabStyle.h in Headers */,
 				0634F03D1609FD9000A6C86A /* MMMetalTabStyle.h in Headers */,
 				0634F03F1609FD9000A6C86A /* MMUnifiedTabStyle.h in Headers */,
-				005DE6271EA419350010F9CE /* MMSierraTabStyle.h in Headers */,
 				0634F09A160A0CDB00A6C86A /* MMTabBarView.h in Headers */,
 				0634F0B2160A1B6600A6C86A /* NSString+MMTabBarViewExtensions.h in Headers */,
 				06B51CAE160B555F00153FA2 /* MMSafariTabStyle.h in Headers */,

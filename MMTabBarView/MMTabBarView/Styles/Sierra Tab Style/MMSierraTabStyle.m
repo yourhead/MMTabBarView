@@ -58,7 +58,7 @@ StaticImage(SierraTabNewPressed)
 
 - (NSSize)intrinsicContentSizeOfTabBarView:(MMTabBarView *)tabBarView
 {
-    return NSMakeSize(-1/* NSViewNoInstrinsicMetric */, 25);
+    return NSMakeSize(-1/* NSViewNoInstrinsicMetric */, 24);
 }
 
 - (CGFloat)leftMarginForTabBarView:(MMTabBarView *)tabBarView {
@@ -83,7 +83,7 @@ StaticImage(SierraTabNewPressed)
 }
 
 - (CGFloat)heightOfTabBarButtonsForTabBarView:(MMTabBarView *)tabBarView {
-    return 25;
+    return 24.0f;
 }
 
 - (NSSize)overflowButtonSizeForTabBarView:(MMTabBarView *)tabBarView {
@@ -98,7 +98,7 @@ StaticImage(SierraTabNewPressed)
 }
 
 - (NSSize)addTabButtonSizeForTabBarView:(MMTabBarView *)tabBarView {
-    return NSMakeSize(18, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
+    return NSMakeSize(15, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
 }
 
 - (BOOL)supportsOrientation:(MMTabBarOrientation)orientation forTabBarView:(MMTabBarView *)tabBarView {
