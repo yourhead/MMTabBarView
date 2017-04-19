@@ -14,6 +14,7 @@
 #import "NSBezierPath+MMTabBarViewExtensions.h"
 #import "MMOverflowPopUpButton.h"
 #import "MMTabBarView.Private.h"
+#import "MMSierraRolloverButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -125,7 +126,7 @@ StaticImage(SierraTabNewPressed)
 
 - (MMRolloverButton *)rolloverButtonWithFrame:(NSRect)frame ofTabBarView:(MMTabBarView *)tabBarView {
     // return our rollover subclass that draws Sierra gradients
-    return [[MMRolloverButton alloc] initWithFrame:frame];
+    return [[MMSierraRolloverButton alloc] initWithFrame:frame];
 }
 
 - (void)updateAddButton:(MMRolloverButton *)aButton ofTabBarView:(MMTabBarView *)tabBarView {
