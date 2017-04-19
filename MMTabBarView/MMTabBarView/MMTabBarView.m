@@ -2745,6 +2745,16 @@ StaticImage(AquaTabNew)
 StaticImage(AquaTabNewPressed)
 StaticImage(AquaTabNewRollover)
 
+- (MMRolloverButton *)_rolloverButtonWithFrame:(NSRect)frame {
+    MMRolloverButton *rolloverButton = nil;
+    if (_style && [_style respondsToSelector:@selector(rolloverButtonWithFrame:ofTabBarView:)]) {
+        rolloverButton = [_style rolloverButtonWithFrame:frame ofTabBarView:self];
+    } else {
+        rolloverButton = [[MMRolloverButton alloc] initWithFrame:frame];
+    }
+    return rolloverButton;
+}
+
 - (void)_updateAddTabButton {
 
     if (_addTabButton) {
@@ -2753,8 +2763,9 @@ StaticImage(AquaTabNewRollover)
     }
         // new tab button
 	NSRect addTabButtonRect = [self addTabButtonRect];
-	_addTabButton = [[MMRolloverButton alloc] initWithFrame:addTabButtonRect];
-    
+//	_addTabButton = [[MMRolloverButton alloc] initWithFrame:addTabButtonRect];
+    _addTabButton = [self _rolloverButtonWithFrame:addTabButtonRect];
+
     [_addTabButton setImage:_staticAquaTabNewImage()];
     [_addTabButton setAlternateImage:_staticAquaTabNewPressedImage()];
     [_addTabButton setRolloverImage:_staticAquaTabNewRolloverImage()];

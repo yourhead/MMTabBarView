@@ -131,6 +131,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSRect)addTabButtonRectForTabBarView:(MMTabBarView *)tabBarView;
 
 /**
+ *  Delegate override for the button creation
+ *
+ *  @param frame    The 'frame of of the new button'
+ *  @param tabBarView The tab bar view
+ */
+- (MMRolloverButton *)rolloverButtonWithFrame:(NSRect)frame ofTabBarView:(MMTabBarView *)tabBarView;
+
+/**
  *  Update 'add button'
  *
  *  @param aButton    The 'add button'

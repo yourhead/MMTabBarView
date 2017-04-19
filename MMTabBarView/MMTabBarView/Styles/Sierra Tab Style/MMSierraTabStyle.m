@@ -123,8 +123,13 @@ StaticImage(SierraTabNewPressed)
 #pragma mark -
 #pragma mark Add Tab Button
 
+- (MMRolloverButton *)rolloverButtonWithFrame:(NSRect)frame ofTabBarView:(MMTabBarView *)tabBarView {
+    // return our rollover subclass that draws Sierra gradients
+    return [[MMRolloverButton alloc] initWithFrame:frame];
+}
+
 - (void)updateAddButton:(MMRolloverButton *)aButton ofTabBarView:(MMTabBarView *)tabBarView {
-    
+
     [aButton setImage:_staticSierraTabNewImage()];
     [aButton setAlternateImage:_staticSierraTabNewPressedImage()];
     [aButton setRolloverImage:_staticSierraTabNewImage()];
