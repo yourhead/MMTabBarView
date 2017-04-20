@@ -92,14 +92,15 @@ StaticImage(SierraTabNewPressed)
 }
 
 - (NSRect)addTabButtonRectForTabBarView:(MMTabBarView *)tabBarView {
-
-    NSRect rect = [tabBarView _addTabButtonRect];
-
-    return rect;
+    NSSize tabBarSize = tabBarView.bounds.size;
+    NSSize buttonSize = [self addTabButtonSizeForTabBarView:tabBarView];
+    CGFloat x = tabBarSize.width - buttonSize.width;
+    return NSMakeRect( x, 0, buttonSize.width, buttonSize.height);
+    //return NSMakeRect( tabBarSize.width - buttonSize.width , 0, buttonSize.width, buttonSize.height);
 }
 
 - (NSSize)addTabButtonSizeForTabBarView:(MMTabBarView *)tabBarView {
-    return NSMakeSize(15, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
+    return NSMakeSize(23, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
 }
 
 - (BOOL)supportsOrientation:(MMTabBarOrientation)orientation forTabBarView:(MMTabBarView *)tabBarView {
@@ -134,6 +135,8 @@ StaticImage(SierraTabNewPressed)
     [aButton setImage:_staticSierraTabNewImage()];
     [aButton setAlternateImage:_staticSierraTabNewPressedImage()];
     [aButton setRolloverImage:_staticSierraTabNewImage()];
+
+    aButton.bordered = YES;
 }
 
 #pragma mark -
