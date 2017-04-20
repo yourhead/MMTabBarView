@@ -63,23 +63,14 @@ StaticImage(SierraTabNewPressed)
 }
 
 - (CGFloat)leftMarginForTabBarView:(MMTabBarView *)tabBarView {
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
-        return 0.f;
-    else
         return 0.0f;
 }
 
 - (CGFloat)rightMarginForTabBarView:(MMTabBarView *)tabBarView {
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
-        return 0.f;
-    else
         return 0.0f;
 }
 
 - (CGFloat)topMarginForTabBarView:(MMTabBarView *)tabBarView {
-    if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
-        return 0.0f;
-
     return 0.0f;
 }
 
@@ -104,11 +95,7 @@ StaticImage(SierraTabNewPressed)
 }
 
 - (BOOL)supportsOrientation:(MMTabBarOrientation)orientation forTabBarView:(MMTabBarView *)tabBarView {
-
-    if (orientation != MMTabBarHorizontalOrientation)
-        return NO;
-    
-    return YES;
+    return NO;
 }
 
 #pragma mark -
