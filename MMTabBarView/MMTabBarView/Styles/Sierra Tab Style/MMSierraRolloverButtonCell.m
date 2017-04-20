@@ -49,9 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 }
 
-- (void)drawTopWithFrame:(NSRect)frame inView:(NSView *)controlView {
-}
-
 #pragma mark - fill gradients
 
 // these are measured values taken from Safari as it has the most consistent tab bar UI
