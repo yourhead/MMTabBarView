@@ -11,56 +11,97 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation MMSierraRolloverButtonCell
 
-- (void)drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
-
-    NSRect topRect = NSMakeRect(frame.origin.x, 0, frame.size.width, 1.0f);
-    NSRect leftRect = NSMakeRect(frame.origin.x, 0, 1.0f, frame.size.height - 1.0f);
-    NSRect fillRect = NSMakeRect(frame.origin.x + 1, frame.origin.y + 1, frame.size.width - 1.0f, frame.size.height - 2.0f);
-
-    NSGradient *borderGradient = nil;
-    NSGradient *fillGradient = nil;
-    NSColor *topColor;
+- (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    NSRect customFrame = NSMakeRect(7.0f, 7.0f, 11.0f, 11.0f);
+//    NSImage *addImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"SierraTabNew"]];
+    NSImage *addImage = [NSImage imageNamed:NSImageNameAddTemplate];
+    CGFloat opacity = 1.0f;
 
     if (controlView.window.isKeyWindow || controlView.window.isMainWindow) {
         if (self.isHighlighted) {
-            borderGradient = [MMSierraRolloverButtonCell mouseDownBorderGradient];
-            fillGradient = [MMSierraRolloverButtonCell mouseDownFillGradient];
-            topColor = [MMSierraRolloverButtonCell mouseDownTopColor];
+            opacity = 0.470f;
         } else if (self.mouseHovered) {
-            borderGradient = [MMSierraRolloverButtonCell hoverBorderGradient];
-            fillGradient = [MMSierraRolloverButtonCell hoverFillGradient];
-            topColor = [MMSierraRolloverButtonCell hoverTopColor];
+            opacity = 0.475f;
         } else {
-            borderGradient = [MMSierraRolloverButtonCell idleBorderGradient];
-            fillGradient = [MMSierraRolloverButtonCell idleFillGradient];
-            topColor = [MMSierraRolloverButtonCell idleTopColor];
+            opacity = 0.45f;
         }
     } else {
-        borderGradient = [MMSierraRolloverButtonCell inactiveBorderGradient];
-        fillGradient = (self.mouseHovered) ? [MMSierraRolloverButtonCell inactiveHoverFillGradient] : [MMSierraRolloverButtonCell inactiveIdleFillGradient];
-        topColor = [MMSierraRolloverButtonCell inactiveTopColor];
+        if (self.mouseHovered) {
+            opacity = 0.400f;
+        } else {
+            opacity = 0.350f;
+        }
     }
 
-    [fillGradient drawInRect:fillRect angle:90.0f];
-    [borderGradient drawInRect:leftRect angle:90.0f];
+    [addImage drawInRect:customFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:opacity respectFlipped:YES hints:nil];
+}
 
-    [topColor set];
-    NSFrameRect(topRect);
+- (NSRect)topBorderRectWithFrame:(NSRect)frame {
+    return NSMakeRect(frame.origin.x, 0, frame.size.width, 1.0f);
+}
 
+- (NSRect)leftBorderRectWithFrame:(NSRect)frame {
+    return NSMakeRect(frame.origin.x, 0, 1.0f, frame.size.height - 1.0f);
+}
+
+- (NSRect)fillRectWithFrame:(NSRect)frame {
+    return NSMakeRect(frame.origin.x + 1, frame.origin.y + 1, frame.size.width - 1.0f, frame.size.height - 2.0f);
+}
+
+- (void)drawActiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
+    NSGradient *topBorderGradient = nil;
+    NSGradient *leftBorderGradient = nil;
+    NSGradient *fillGradient = nil;
+
+    if (self.isHighlighted) {
+        topBorderGradient = [MMSierraRolloverButtonCell mouseDownTopBorderGradient];
+        leftBorderGradient = [MMSierraRolloverButtonCell mouseDownLeftBorderGradient];
+        fillGradient = [MMSierraRolloverButtonCell mouseDownFillGradient];
+    } else if (self.mouseHovered) {
+        topBorderGradient = [MMSierraRolloverButtonCell hoverTopBorderGradient];
+        leftBorderGradient = [MMSierraRolloverButtonCell hoverLeftBorderGradient];
+        fillGradient = [MMSierraRolloverButtonCell hoverFillGradient];
+    } else {
+        topBorderGradient = [MMSierraRolloverButtonCell idleTopBorderGradient];
+        leftBorderGradient = [MMSierraRolloverButtonCell idleLeftBorderGradient];
+        fillGradient = [MMSierraRolloverButtonCell idleFillGradient];
+    }
+
+    [fillGradient drawInRect:[self fillRectWithFrame:frame] angle:90.0f];
+    [topBorderGradient drawInRect:[self topBorderRectWithFrame:frame] angle:90.0f];
+    [leftBorderGradient drawInRect:[self leftBorderRectWithFrame:frame] angle:90.0f];
+}
+
+- (void)drawInactiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
+    if (self.mouseHovered) {
+        [[MMSierraRolloverButtonCell inactiveIdleFillColor] set];
+    } else {
+        [[MMSierraRolloverButtonCell inactiveHoverFillColor] set];
+    }
+    NSFrameRect([self fillRectWithFrame:frame]);
+
+    [[MMSierraRolloverButtonCell inactiveBorderColor] set];
+    NSFrameRect([self leftBorderRectWithFrame:frame]);
+    NSFrameRect([self topBorderRectWithFrame:frame]);
+}
+
+- (void)drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
+    if (controlView.window.isKeyWindow || controlView.window.isMainWindow) {
+        [self drawActiveBezelWithFrame:frame inView:controlView];
+    } else {
+        [self drawInactiveBezelWithFrame:frame inView:controlView];
+    }
 }
 
 #pragma mark - fill gradients
-
-// these are measured values taken from Safari as it has the most consistent tab bar UI
-// all gradients roughly gray, but all have a slightly -green cast
 
 + (NSGradient *)idleFillGradient {
     static NSGradient *gradient = nil;
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.729f green:0.722f blue:0.729f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.710f green:0.702f blue:0.710f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.698 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.682 alpha:1.0]
                       ]];
     }
     return gradient;
@@ -71,8 +112,8 @@ NS_ASSUME_NONNULL_BEGIN
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.706f green:0.694f blue:0.706f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.671f green:0.667f blue:0.671f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.663 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.647 alpha:1.0]
                       ]];
     }
     return gradient;
@@ -83,120 +124,114 @@ NS_ASSUME_NONNULL_BEGIN
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.651f green:0.643f blue:0.651f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.600f green:0.596f blue:0.600f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.608 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.557 alpha:1.0]
                       ]];
     }
     return gradient;
 }
 
-+ (NSGradient *)inactiveIdleFillGradient {
+#pragma mark - top border gradients
+
++ (NSGradient *)idleTopBorderGradient {
     static NSGradient *gradient = nil;
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.925f green:0.925f blue:0.925f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.925f green:0.925f blue:0.925f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.592 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.588 alpha:1.0]
                       ]];
     }
     return gradient;
 }
 
-+ (NSGradient *)inactiveHoverFillGradient {
++ (NSGradient *)hoverTopBorderGradient {
     static NSGradient *gradient = nil;
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.886f green:0.886f blue:0.886f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.886f green:0.886f blue:0.886f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.494 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.490 alpha:1.0]
                       ]];
     }
     return gradient;
 }
 
-#pragma mark - top border colors
-
-+ (NSColor *)idleTopColor {
-    static NSColor *color = nil;
-    if (!color) {
-        color = [NSColor colorWithCalibratedRed:0.624 green:0.616 blue:0.624 alpha:1.0];
++ (NSGradient *)mouseDownTopBorderGradient {
+    static NSGradient *gradient = nil;
+    if (!gradient) {
+        gradient = [[NSGradient alloc] initWithColors:
+                    @[
+                      [NSColor colorWithCalibratedWhite:0.471 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.467 alpha:1.0]
+                      ]];
     }
-    return color;
-}
-
-+ (NSColor *)hoverTopColor {
-    static NSColor *color = nil;
-    if (!color) {
-        color = [NSColor colorWithCalibratedRed:0.533 green:0.529 blue:0.533 alpha:1.0];
-    }
-    return color;
-}
-
-+ (NSColor *)mouseDownTopColor {
-    static NSColor *color = nil;
-    if (!color) {
-        color = [NSColor colorWithCalibratedRed:0.510 green:0.506 blue:0.510 alpha:1.0];
-    }
-    return color;
-}
-
-+ (NSColor *)inactiveTopColor {
-    static NSColor *color = nil;
-    if (!color) {
-        color = [NSColor colorWithCalibratedRed:0.824 green:0.824 blue:0.824 alpha:1.0];
-    }
-    return color;
+    return gradient;
 }
 
 
 #pragma mark - left-border gradients
 
-+ (NSGradient *)idleBorderGradient {
++ (NSGradient *)idleLeftBorderGradient {
     static NSGradient *gradient = nil;
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.620f green:0.612f blue:0.620f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.596f green:0.592f blue:0.596f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.588 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.573 alpha:1.0]
                       ]];
     }
     return gradient;
 }
 
-+ (NSGradient *)hoverBorderGradient {
++ (NSGradient *)hoverLeftBorderGradient {
     static NSGradient *gradient = nil;
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.565f green:0.593f blue:0.565f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.529f green:0.522f blue:0.529f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.522 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.506 alpha:1.0]
                       ]];
     }
     return gradient;
 }
 
-+ (NSGradient *)mouseDownBorderGradient {
++ (NSGradient *)mouseDownLeftBorderGradient {
     static NSGradient *gradient = nil;
     if (!gradient) {
         gradient = [[NSGradient alloc] initWithColors:
                     @[
-                      [NSColor colorWithCalibratedRed:0.533f green:0.525f blue:0.533f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.486f green:0.482f blue:0.486f alpha:1.0f]
+                      [NSColor colorWithCalibratedWhite:0.490 alpha:1.0],
+                      [NSColor colorWithCalibratedWhite:0.443 alpha:1.0]
                       ]];
     }
     return gradient;
 }
 
-+ (NSGradient *)inactiveBorderGradient {
-    static NSGradient *gradient = nil;
-    if (!gradient) {
-        gradient = [[NSGradient alloc] initWithColors:
-                    @[
-                      [NSColor colorWithCalibratedRed:0.824f green:0.824f blue:0.824f alpha:1.0f],
-                      [NSColor colorWithCalibratedRed:0.824f green:0.824f blue:0.824f alpha:1.0f]
-                      ]];
+#pragma mark - inactive windows
+
++ (NSColor *)inactiveIdleFillColor {
+    static NSColor *color = nil;
+    if (!color) {
+        color = [NSColor colorWithCalibratedWhite:0.906 alpha:1.0];
     }
-    return gradient;
+    return color;
+}
+
++ (NSColor *)inactiveHoverFillColor {
+    static NSColor *color = nil;
+    if (!color) {
+        color = [NSColor colorWithCalibratedWhite:0.871 alpha:1.0];
+    }
+    return color;
+}
+
++ (NSColor *)inactiveBorderColor {
+    static NSColor *color = nil;
+    if (!color) {
+        color = [NSColor colorWithCalibratedWhite:0.784 alpha:1.0];
+    }
+    return color;
 }
 
 @end
