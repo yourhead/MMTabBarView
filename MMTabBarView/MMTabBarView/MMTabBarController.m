@@ -301,7 +301,33 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 						[newWidths addObject:[NSNumber numberWithDouble:revisedWidth]];
 						totalOccupiedWidth += revisedWidth;
 						numberOfVisibleButtons++;
-                        
+
+                        if (totalOccupiedWidth < availableWidth) {
+                            // when the available width is not divided evenly by totalOccupiedWidth
+                            // there will be a small gap between the addTab-button and the left-most tab
+                            // here we distribute the remainder among the tabs.
+                            // we'll use the same mechanism as above for consistancy
+                            // this will create the least jitter of the separators
+
+                            NSLog (@"small: %f:%f :: %f", availableWidth, totalOccupiedWidth, availableWidth - totalOccupiedWidth);
+                            q = 0;
+                            while ((q < [newWidths count]) && (availableWidth > totalOccupiedWidth)) {
+                                [newWidths replaceObjectAtIndex:q withObject:[NSNumber numberWithDouble:revisedWidth+1]];
+                                totalOccupiedWidth ++;
+                                q ++;
+                            }
+
+                            NSLog(@"%@", newWidths);
+                            NSInteger tot = 0;
+                            for (NSNumber *newWidth in newWidths) {
+                                tot += newWidth.integerValue;
+                            }
+                            NSLog(@"%@ :: %ld", newWidths, tot);
+
+                        }
+                        //
+                        NSLog (@"small: %f:%f :: %f", availableWidth, totalOccupiedWidth, availableWidth - totalOccupiedWidth);
+
                     // couldn't fit that last one...
 					} else {
                         // adjust available width for overflow button

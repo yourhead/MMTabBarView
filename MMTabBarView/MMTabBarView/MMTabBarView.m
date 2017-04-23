@@ -265,7 +265,13 @@ static NSMutableDictionary *registeredStyleClasses = nil;
     
         //Don't let attached buttons overlap the add tab button if it is visible
 	if ([self showAddTabButton]) {
-		result -= [self addTabButtonSize].width + 2*kMMTabBarCellPadding;
+
+        CGFloat padding = kMMTabBarCellPadding;
+        if ([_style respondsToSelector:@selector(addTabButtonPaddingForTabBarView:)]) {
+            padding = [_style addTabButtonPaddingForTabBarView:self];
+        }
+
+		result -= [self addTabButtonSize].width + (2.0f * padding);
 	}
     
     return result;

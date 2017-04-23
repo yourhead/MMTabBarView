@@ -63,11 +63,11 @@ StaticImage(SierraTabNewPressed)
 }
 
 - (CGFloat)leftMarginForTabBarView:(MMTabBarView *)tabBarView {
-        return 0.0f;
+    return 0.0f;
 }
 
 - (CGFloat)rightMarginForTabBarView:(MMTabBarView *)tabBarView {
-        return 0.0f;
+    return 0.0f;
 }
 
 - (CGFloat)topMarginForTabBarView:(MMTabBarView *)tabBarView {
@@ -94,6 +94,10 @@ StaticImage(SierraTabNewPressed)
     return NSMakeSize(24, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
 }
 
+- (CGFloat)addTabButtonPaddingForTabBarView:(MMTabBarView *)tabBarView {
+    return 0;
+}
+
 - (BOOL)supportsOrientation:(MMTabBarOrientation)orientation forTabBarView:(MMTabBarView *)tabBarView {
     return NO;
 }
@@ -102,7 +106,6 @@ StaticImage(SierraTabNewPressed)
 #pragma mark Drag Support
 
 - (NSRect)draggingRectForTabButton:(MMAttachedTabBarButton *)aButton ofTabBarView:(MMTabBarView *)tabBarView {
-
 	NSRect dragRect = [aButton stackingFrame];
 	dragRect.size.width++;
 	return dragRect;
@@ -187,8 +190,6 @@ StaticImage(SierraTabNewPressed)
 
         [[MMSierraTabStyle edgeBorderGradient] drawInRect:[self leftRectWithFrame:frame] angle:90];
         [[MMSierraTabStyle edgeBorderGradient] drawInRect:[self rightRectWithFrame:frame] angle:90];
-
-
     }
 }
 
@@ -353,113 +354,6 @@ StaticImage(SierraTabNewPressed)
     return NSMakeRect(frame.origin.x, frame.origin.y + 1, frame.size.width, frame.size.height - 2.0f);
 }
 
-//- (void)drawActiveTabWithFrame:(NSRect)frame withCapMask:(MMBezierShapeCapMask)capMask button:(MMAttachedTabBarButton *)button inView:(MMTabBarView *)tabBarView {
-//    NSGradient *topBorderGradient = nil;
-//    NSGradient *leftBorderGradient = nil;
-//    NSGradient *fillGradient = nil;
-//
-//
-//
-//
-////    NSRectFill(frame);
-//
-////    if ([button state] == NSOnState) {
-////        topBorderGradient = [MMSierraTabStyle selectedTopBorderGradient];
-////        leftBorderGradient = [MMSierraTabStyle selectedLeftBorderGradient];
-////        fillGradient = [MMSierraTabStyle selectedFillGradient];
-////    } else if (button.mouseHovered) {
-////        topBorderGradient = [MMSierraTabStyle hoverTopBorderGradient];
-////        leftBorderGradient = [MMSierraTabStyle hoverLeftBorderGradient];
-////        fillGradient = [MMSierraTabStyle hoverFillGradient];
-////    } else {
-////        topBorderGradient = [MMSierraTabStyle idleTopBorderGradient];
-////        leftBorderGradient = [MMSierraTabStyle idleLeftBorderGradient];
-////        fillGradient = [MMSierraTabStyle idleFillGradient];
-////    }
-//
-////    [fillGradient drawInRect:[self fillRectWithFrame:frame] angle:90.0f];
-////    [leftBorderGradient drawInRect:[self leftBorderRectWithFrame:frame] angle:90.0f];
-////    [topBorderGradient drawInRect:[self topBorderRectWithFrame:frame] angle:90.0f];
-//
-//    [[NSColor redColor] set];
-//    if (capMask & MMBezierShapeLeftCap) NSFrameRect([self leftRectWithFrame:frame]);
-//
-//    [[NSColor redColor] set];
-//    if (capMask & MMBezierShapeRightCap) NSFrameRect([self rightRectWithFrame:frame]);
-//
-//}
-
-//- (void)_drawCardBezelInRect:(NSRect)aRect withCapMask:(MMBezierShapeCapMask)capMask usingStatesOfAttachedButton:(MMAttachedTabBarButton *)button ofTabBarView:(MMTabBarView *)tabBarView {
-//
-//    if ([tabBarView isWindowActive]) {
-//        [self drawActiveTabWithFrame:aRect withCapMask:capMask button:button inView:tabBarView];
-////        NSColor *color = nil;
-////        color = [NSColor redColor];
-////        [color set];
-////        NSFrameRect(aRect);
-//    } else {
-//        NSColor *color = nil;
-//        color = [NSColor blueColor];
-//        [color set];
-//        NSFrameRect(aRect);
-//    }
-//
-//
-////    NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
-////    CGFloat radius = 0.0f;
-////        
-////    NSBezierPath *fillPath = [NSBezierPath bezierPathWithCardInRect:aRect radius:radius capMask:capMask|MMBezierShapeFillPath];
-////
-////    if ([tabBarView isWindowActive]) {
-////        if ([button state] == NSOnState) {
-////            [[NSGraphicsContext currentContext] setShouldAntialias:NO];
-////            [self.selectedTabColor set];
-////            [fillPath fill];
-////            [[NSGraphicsContext currentContext] setShouldAntialias:YES];
-////        } else {
-////            [self.unselectedTabColor set];
-////            [fillPath fill];
-////        }
-////    } else {
-////        
-////        if ([button state] == NSOnState) {
-////            [[NSGraphicsContext currentContext] setShouldAntialias:NO];
-////            [[self.selectedTabColor blendedColorWithFraction:0.4f ofColor:[NSColor whiteColor]] set];
-////            [fillPath fill];
-////            [[NSGraphicsContext currentContext] setShouldAntialias:YES];
-////        } else {
-////            [[self.unselectedTabColor blendedColorWithFraction:0.4f ofColor:[NSColor whiteColor]] set];
-////            [fillPath fill];
-////        }
-////    }        
-////    
-////    NSBezierPath *bezier = [NSBezierPath bezierPath];
-////    [lineColor set];
-////    
-////    if ([button shouldDisplayLeftDivider]) {
-////        //draw the tab divider
-////        [bezier moveToPoint:NSMakePoint(NSMinX(aRect), NSMinY(aRect))];
-////        [bezier lineToPoint:NSMakePoint(NSMinX(aRect), NSMaxY(aRect))];
-////    }
-////    
-////    [bezier moveToPoint:NSMakePoint(NSMaxX(aRect), NSMinY(aRect))];
-////    [bezier lineToPoint:NSMakePoint(NSMaxX(aRect), NSMaxY(aRect))];
-////    [bezier stroke];
-//}
-//
-//- (void)_drawBoxBezelInRect:(NSRect)aRect withCapMask:(MMBezierShapeCapMask)capMask usingStatesOfAttachedButton:(MMAttachedTabBarButton *)button ofTabBarView:(MMTabBarView *)tabBarView {
-//
-//    capMask &= ~MMBezierShapeFillPath;
-//    
-//        // fill
-//    if ([button state] == NSOnState) {
-//        [[NSColor colorWithCalibratedWhite:0.0 alpha:0.2] set];
-//        NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);            
-//    } else if ([button mouseHovered]) {
-//        [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
-//        NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
-//    }
-//}
 
 #pragma mark - fill gradients
 

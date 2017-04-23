@@ -119,6 +119,15 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return Size of 'add button'
  */
+- (CGFloat)addTabButtonPaddingForTabBarView:(MMTabBarView *)tabBarView;
+
+/**
+ *  Get size of tab bar view's 'add button'
+ *
+ *  @param tabBarView A tab bar view
+ *
+ *  @return Size of 'add button'
+ */
 - (NSSize)addTabButtonSizeForTabBarView:(MMTabBarView *)tabBarView;
 
 /**
