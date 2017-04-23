@@ -155,6 +155,25 @@ StaticImage(SierraTabNewPressed)
     
 }
 
+
+
+#pragma mark -
+#pragma mark Close Button Drawing
+
+- (void)drawTabBarCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+
+}
+
+- (void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+
+}
+
+- (void)drawInteriorOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+
+}
+
+
+
 #pragma mark -
 #pragma mark Drawing
 

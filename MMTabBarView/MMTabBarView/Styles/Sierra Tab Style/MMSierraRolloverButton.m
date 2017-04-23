@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
     return [MMSierraRolloverButtonCell class];
 }
 
-
 - (instancetype)initWithFrame:(NSRect)frameRect {
 
     self = [super initWithFrame:frameRect];
@@ -26,17 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
     return self;
 }
-
-
-//[_addTabButton setImage:_staticAquaTabNewImage()];
-//[_addTabButton setAlternateImage:_staticAquaTabNewPressedImage()];
-//[_addTabButton setRolloverImage:_staticAquaTabNewRolloverImage()];
-//
-//[_addTabButton setTitle:@""];
-//[_addTabButton setImagePosition:NSImageOnly];
-//[_addTabButton setRolloverButtonType:MMRolloverActionButton];
-//[_addTabButton setBordered:NO];
-//[_addTabButton setBezelStyle:NSShadowlessSquareBezelStyle];
 
 @end
 
