@@ -309,7 +309,6 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                             // we'll use the same mechanism as above for consistancy
                             // this will create the least jitter of the separators
 
-                            NSLog (@"small: %f:%f :: %f", availableWidth, totalOccupiedWidth, availableWidth - totalOccupiedWidth);
                             q = 0;
                             while ((q < [newWidths count]) && (availableWidth > totalOccupiedWidth)) {
                                 [newWidths replaceObjectAtIndex:q withObject:[NSNumber numberWithDouble:revisedWidth+1]];
@@ -317,16 +316,12 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                                 q ++;
                             }
 
-                            NSLog(@"%@", newWidths);
                             NSInteger tot = 0;
                             for (NSNumber *newWidth in newWidths) {
                                 tot += newWidth.integerValue;
                             }
-                            NSLog(@"%@ :: %ld", newWidths, tot);
 
                         }
-                        //
-                        NSLog (@"small: %f:%f :: %f", availableWidth, totalOccupiedWidth, availableWidth - totalOccupiedWidth);
 
                     // couldn't fit that last one...
 					} else {
