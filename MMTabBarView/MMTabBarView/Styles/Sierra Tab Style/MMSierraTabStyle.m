@@ -211,6 +211,12 @@ StaticImage(SierraTabNewPressed)
 #pragma mark -
 #pragma mark Drawing
 
+- (void)drawTitleOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+    NSRect rect = [cell titleRectForBounds:frame];
+    NSAttributedString *attrString = [cell attributedStringValue];
+    [attrString drawInRect:rect];
+}
+
 - (void)drawBezelOfTabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect {
     NSRect topRect = [self topBorderRectWithFrame:rect];
     NSRect bottomRect = [self bottomBorderRectWithFrame:rect];
