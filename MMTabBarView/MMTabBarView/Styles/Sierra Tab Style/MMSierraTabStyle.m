@@ -372,7 +372,7 @@ StaticImage(SierraTabNewPressed)
             color = [MMSierraTabStyle inactiveIdleFillColor];
         }
         [color set];
-        NSFrameRect(rect);
+        NSRectFill(rect);
     }
 }
 
