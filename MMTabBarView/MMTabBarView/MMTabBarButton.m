@@ -176,6 +176,13 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 - (void)setStyle:(id <MMTabStyle>)newStyle {
     [[self cell] setStyle:newStyle];
     [self updateCell];
+
+    if (_closeButton) {
+        [_closeButton removeFromSuperview];
+    }
+    _closeButton = [self _closeButtonForBounds:[self bounds]];
+    [self addSubview:_closeButton];
+
 }
 
 - (MMTabStateMask)tabState {
@@ -301,15 +308,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 #pragma mark Private Methods
 
 - (void)_commonInit {
-
-    NSRect closeButtonRect = [self _closeButtonRectForBounds:[self bounds]];
-    _closeButton = [[MMRolloverButton alloc] initWithFrame:closeButtonRect];
-    
-    [_closeButton setTitle:@""];
-    [_closeButton setImagePosition:NSImageOnly];
-    [_closeButton setRolloverButtonType:MMRolloverActionButton];
-    [_closeButton setBordered:NO];
-    [_closeButton setBezelStyle:NSShadowlessSquareBezelStyle];
+    _closeButton = [self _closeButtonForBounds:[self bounds]];
     [self addSubview:_closeButton];
 
     _indicator = [[MMProgressIndicator alloc] initWithFrame:NSMakeRect(0.0, 0.0, kMMTabBarIndicatorWidth, kMMTabBarIndicatorWidth)];
@@ -319,6 +318,10 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     NSRect indicatorRect = [self _indicatorRectForBounds:[self bounds]];
     [_indicator setFrame:indicatorRect];
     [self addSubview:_indicator];
+}
+
+- (MMRolloverButton *)_closeButtonForBounds:(NSRect)bounds {
+    return [[self cell] closeButtonForBounds:bounds];
 }
 
 - (NSRect)_closeButtonRectForBounds:(NSRect)bounds {

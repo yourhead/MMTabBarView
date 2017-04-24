@@ -264,6 +264,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSSize)closeButtonSizeForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell;
 
 /**
+ *  Allows the style to override the close button and provide its own subclass
+ *
+ *  @param theRect Bounds rect
+ *  @param cell    A tab bar button cell
+ *
+ *  @return Close button. An instance of a subclass of MMRolloverButton
+ */
+- (MMRolloverButton *)closeButtonForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell;
+
+/**
  *  Get rect of close button for bounds of tab bar button cell
  *
  *  @param theRect Bounds rect

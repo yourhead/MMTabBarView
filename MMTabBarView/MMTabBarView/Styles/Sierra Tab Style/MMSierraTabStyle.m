@@ -15,6 +15,7 @@
 #import "MMOverflowPopUpButton.h"
 #import "MMTabBarView.Private.h"
 #import "MMSierraRolloverButton.h"
+#import "MMSierraCloseButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -160,17 +161,50 @@ StaticImage(SierraTabNewPressed)
 #pragma mark -
 #pragma mark Close Button Drawing
 
-- (void)drawTabBarCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+- (NSSize)closeButtonSizeForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell {
+    CGFloat width = 16.0f;
+    CGFloat height = 16.0f;
+    return NSMakeSize(width, height);
+}
+
+- (NSRect)closeButtonRectForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell {
+    CGFloat marginX = 4.0f;
+    CGFloat marginY = 4.0f;
+    NSSize size = [self closeButtonSizeForBounds:theRect ofTabCell:cell];
+
+    CGFloat x = theRect.origin.x + marginX;
+    CGFloat y = theRect.origin.y + marginY;
+    CGFloat width = size.width;
+    CGFloat height = size.height;
+    return NSMakeRect(x, y, width, height);
+}
+
+- (MMRolloverButton *)closeButtonForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell {
+
+    NSRect frame = [self closeButtonRectForBounds:theRect ofTabCell:cell];
+    MMRolloverButton *closeButton = [[MMSierraCloseButton alloc] initWithFrame:frame];
+
+    [closeButton setTitle:@""];
+    [closeButton setImagePosition:NSImageOnly];
+    [closeButton setRolloverButtonType:MMRolloverActionButton];
+    [closeButton setBezelStyle:NSShadowlessSquareBezelStyle];
+
+    return closeButton;
 
 }
 
-- (void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
 
-}
-
-- (void)drawInteriorOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
-
-}
+//- (void)drawTabBarCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+//
+//}
+//
+//- (void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+//
+//}
+//
+//- (void)drawInteriorOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
+//
+//}
 
 
 

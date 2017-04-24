@@ -340,6 +340,19 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
+- (MMRolloverButton *)closeButtonForBounds:(NSRect)theRect {
+
+    id <MMTabStyle> tabStyle = [self style];
+
+    // ask style for a button if available
+    if ([tabStyle respondsToSelector:@selector(closeButtonForBounds:ofTabCell:)]) {
+        return [tabStyle closeButtonForBounds:theRect ofTabCell:self];
+        // default handling
+    } else {
+        return [self _closeButtonForBounds:theRect];
+    }
+}
+
 - (CGFloat)minimumWidthOfCell {
 
     id <MMTabStyle> style = [self style];
@@ -866,6 +879,20 @@ NS_ASSUME_NONNULL_BEGIN
     NSRect drawingRect = [self drawingRectForBounds:theRect];
 
     return NSMakeSize(12.0,drawingRect.size.height);
+}
+
+- (MMRolloverButton *)_closeButtonForBounds:(NSRect)theRect {
+
+    NSRect frame = [self closeButtonRectForBounds:theRect];
+    MMRolloverButton *closeButton = [[MMRolloverButton alloc] initWithFrame:frame];
+
+    [closeButton setTitle:@""];
+    [closeButton setImagePosition:NSImageOnly];
+    [closeButton setRolloverButtonType:MMRolloverActionButton];
+    [closeButton setBordered:NO];
+    [closeButton setBezelStyle:NSShadowlessSquareBezelStyle];
+
+    return closeButton;
 }
 
 - (NSRect)_closeButtonRectForBounds:(NSRect)theRect {

@@ -162,6 +162,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSRect)indicatorRectForBounds:(NSRect)theRect;
 - (NSSize)objectCounterSize;
 - (NSRect)objectCounterRectForBounds:(NSRect)theRect;
+- (MMRolloverButton *)closeButtonForBounds:(NSRect)theRect;
 - (NSRect)closeButtonRectForBounds:(NSRect)theRect;
 
 @property (readonly) CGFloat minimumWidthOfCell;
