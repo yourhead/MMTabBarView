@@ -1,5 +1,19 @@
-MMTabBarView
-============
+
+
+
+
+MMTabBarView -- Sierra Style Fork
+=================================
+
+This is a fork of the MMTabBarView to add a macOS Sierra style tabs. This enables look-alike tabs in use-cases where the built in macOS won't function.
+
+There are many Apple apps that include tabs that are similarly styled in Sierra, but each have subtle variations. After careful analysis it seems that the tabs in Safari are the most feature complete and stylistically consistent. So all gradient curves and behaviors are matched as closely as possible to that.
+
+I have intentionally chosen to support the overflow menu instead of the overflowing bunched-tabs of macOS Sierra as it seems a bit more friendly.
+
+
+
+Original ReadMe
 
 A Mac OS X tab bar view that works on 10.9+ with Xcode 8.0 or higher.<br>
 MMTabBarView is a modernized and view based re-write of PSMTabBarControl, <br>
