@@ -21,14 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation MMSierraTabStyle
 
-StaticImage(SierraTabClose_Front)
-StaticImage(SierraTabClose_Front_Pressed)
-StaticImage(SierraTabClose_Front_Rollover)
-StaticImageWithFilename(SierraTabCloseDirty_Front, AquaTabCloseDirty_Front)
-StaticImageWithFilename(SierraTabCloseDirty_Front_Pressed, AquaTabCloseDirty_Front_Pressed)
-StaticImageWithFilename(SierraTabCloseDirty_Front_Rollover, AquaTabCloseDirty_Front_Rollover)
-StaticImage(SierraTabNew)
-StaticImage(SierraTabNewPressed)
+//StaticImage(SierraTabClose_Front)
+//StaticImage(SierraTabClose_Front_Pressed)
+//StaticImage(SierraTabClose_Front_Rollover)
+//StaticImageWithFilename(SierraTabCloseDirty_Front, AquaTabCloseDirty_Front)
+//StaticImageWithFilename(SierraTabCloseDirty_Front_Pressed, AquaTabCloseDirty_Front_Pressed)
+//StaticImageWithFilename(SierraTabCloseDirty_Front_Rollover, AquaTabCloseDirty_Front_Rollover)
+//StaticImage(SierraTabNew)
+//StaticImage(SierraTabNewPressed)
 
 + (NSString *)name {
     return @"Sierra";
@@ -123,40 +123,8 @@ StaticImage(SierraTabNewPressed)
 
 - (void)updateAddButton:(MMRolloverButton *)aButton ofTabBarView:(MMTabBarView *)tabBarView {
 
-    [aButton setImage:_staticSierraTabNewImage()];
-    [aButton setAlternateImage:_staticSierraTabNewPressedImage()];
-    [aButton setRolloverImage:_staticSierraTabNewImage()];
-
     aButton.bordered = YES;
 }
-
-#pragma mark -
-#pragma mark Providing Images
-
-- (NSImage *)closeButtonImageOfType:(MMCloseButtonImageType)type forTabCell:(MMTabBarButtonCell *)cell
-{
-    switch (type) {
-        case MMCloseButtonImageTypeStandard:
-            return _staticSierraTabClose_FrontImage();
-        case MMCloseButtonImageTypeRollover:
-            return _staticSierraTabClose_Front_RolloverImage();
-        case MMCloseButtonImageTypePressed:
-            return _staticSierraTabClose_Front_PressedImage();
-            
-        case MMCloseButtonImageTypeDirty:
-            return _staticSierraTabCloseDirty_FrontImage();
-        case MMCloseButtonImageTypeDirtyRollover:
-            return _staticSierraTabCloseDirty_Front_RolloverImage();
-        case MMCloseButtonImageTypeDirtyPressed:
-            return _staticSierraTabCloseDirty_Front_PressedImage();
-            
-        default:
-            break;
-    }
-    
-}
-
-
 
 #pragma mark -
 #pragma mark Close Button Drawing
@@ -192,20 +160,6 @@ StaticImage(SierraTabNewPressed)
     return closeButton;
 
 }
-
-
-//- (void)drawTabBarCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
-//
-//}
-//
-//- (void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
-//
-//}
-//
-//- (void)drawInteriorOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
-//
-//}
-
 
 
 #pragma mark -
@@ -252,12 +206,74 @@ StaticImage(SierraTabNewPressed)
     }
 }
 
--(void)drawBezelOfOverflowButton:(MMOverflowPopUpButton *)overflowButton ofTabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)rect {
+- (void)updateOverflowPopUpButton:(MMOverflowPopUpButton *)aButton ofTabBarView:(MMTabBarView *)tabBarView {
+    static NSImage *overflowImage = nil;
+    if (!overflowImage) {
+        overflowImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"MMSierraOverflow"]];
+        overflowImage.template = YES;
+    }
 
-//    MMAttachedTabBarButton *lastAttachedButton = [tabBarView lastAttachedButton];
-//    if ([lastAttachedButton isSliding])
-//        return;
-//    
+    aButton.image = overflowImage;
+    aButton.alternateImage = overflowImage;
+
+}
+
+-(void)drawBezelOfOverflowButton:(MMOverflowPopUpButton *)button ofTabBarView:(MMTabBarView *)tabBarView inRect:(NSRect)barRect {
+
+    MMAttachedTabBarButton *lastAttachedButton = [tabBarView lastAttachedButton];
+    if ([lastAttachedButton isSliding])
+        return;
+
+    // fill
+    NSRect rect = [self fillRectWithFrame:button.frame];
+    if ([tabBarView isWindowActive]) {
+        NSGradient *gradient = nil;
+        if (lastAttachedButton.state == NSOnState) {
+            gradient = [MMSierraTabStyle selectedFillGradient];
+        } else if (lastAttachedButton.mouseHovered) {
+            gradient = [MMSierraTabStyle hoverFillGradient];
+        } else {
+            gradient = [MMSierraTabStyle idleFillGradient];
+        }
+        [gradient drawInRect:rect angle:90];
+    } else {
+        NSColor *color = nil;
+        if (lastAttachedButton.state == NSOnState) {
+            color = [MMSierraTabStyle inactiveSelectedFillColor];
+        } else if (lastAttachedButton.mouseHovered) {
+            color = [MMSierraTabStyle inactiveHoverFillColor];
+        } else {
+            color = [MMSierraTabStyle inactiveIdleFillColor];
+        }
+        [color set];
+        NSRectFill(rect);
+    }
+
+    // top
+    rect = [self topBorderRectWithFrame:button.frame];
+    if ([tabBarView isWindowActive]) {
+        NSGradient *gradient = nil;
+        if (lastAttachedButton.state == NSOnState) {
+            gradient = [MMSierraTabStyle selectedTopBorderGradient];
+        } else {
+            gradient = [MMSierraTabStyle unselectedTopBorderGradient];
+        }
+        [gradient drawInRect:rect angle:90];
+    } else {
+        [[MMSierraTabStyle inactiveBorderColor] set];
+        NSFrameRect(rect);
+    }
+
+    // bottom
+    rect = [self bottomBorderRectWithFrame:button.frame];
+    if (lastAttachedButton.state == NSOnState) {
+        [[MMSierraTabStyle bottomBorderGradient] drawInRect:rect angle:90];
+    } else {
+        [[MMSierraTabStyle inactiveBottomBorderColor] set];
+        NSFrameRect(rect);
+    }
+
+//
 //    NSWindow *window = [tabBarView window];
 //    NSToolbar *toolbar = [window toolbar];
 //    

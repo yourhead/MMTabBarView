@@ -11,12 +11,9 @@
 		0048004F1EA80D480003E9A8 /* MMSierraRolloverButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048004B1EA80D480003E9A8 /* MMSierraRolloverButton.m */; };
 		004800501EA80D480003E9A8 /* MMSierraRolloverButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0048004C1EA80D480003E9A8 /* MMSierraRolloverButtonCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004800521EA80EE50003E9A8 /* MMSierraRolloverButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048004D1EA80D480003E9A8 /* MMSierraRolloverButtonCell.m */; };
-		005DE61D1EA419350010F9CE /* SierraTabClose_Front.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE6111EA419350010F9CE /* SierraTabClose_Front.png */; };
-		005DE61E1EA419350010F9CE /* SierraTabClose_Front@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE6121EA419350010F9CE /* SierraTabClose_Front@2x.png */; };
-		005DE6231EA419350010F9CE /* SierraTabNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE6171EA419350010F9CE /* SierraTabNew.png */; };
-		005DE6241EA419350010F9CE /* SierraTabNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 005DE6181EA419350010F9CE /* SierraTabNew@2x.png */; };
 		005DE6271EA419350010F9CE /* MMSierraTabStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 005DE61B1EA419350010F9CE /* MMSierraTabStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		005DE6281EA419350010F9CE /* MMSierraTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 005DE61C1EA419350010F9CE /* MMSierraTabStyle.m */; };
+		00B950BD1EAEBC9E00243F2D /* MMSierraOverflow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 00B950BC1EAEBC9E00243F2D /* MMSierraOverflow.pdf */; };
 		00FB622D1EAD6A5800EF54E7 /* MMSierraCloseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FB622B1EAD6A5800EF54E7 /* MMSierraCloseButton.h */; };
 		00FB622E1EAD6A5800EF54E7 /* MMSierraCloseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FB622C1EAD6A5800EF54E7 /* MMSierraCloseButton.m */; };
 		00FB62311EAD6A6F00EF54E7 /* MMSierraCloseButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FB622F1EAD6A6F00EF54E7 /* MMSierraCloseButtonCell.h */; };
@@ -200,12 +197,9 @@
 		0048004B1EA80D480003E9A8 /* MMSierraRolloverButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraRolloverButton.m; sourceTree = "<group>"; };
 		0048004C1EA80D480003E9A8 /* MMSierraRolloverButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSierraRolloverButtonCell.h; sourceTree = "<group>"; };
 		0048004D1EA80D480003E9A8 /* MMSierraRolloverButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraRolloverButtonCell.m; sourceTree = "<group>"; };
-		005DE6111EA419350010F9CE /* SierraTabClose_Front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SierraTabClose_Front.png; sourceTree = "<group>"; };
-		005DE6121EA419350010F9CE /* SierraTabClose_Front@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SierraTabClose_Front@2x.png"; sourceTree = "<group>"; };
-		005DE6171EA419350010F9CE /* SierraTabNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SierraTabNew.png; sourceTree = "<group>"; };
-		005DE6181EA419350010F9CE /* SierraTabNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SierraTabNew@2x.png"; sourceTree = "<group>"; };
 		005DE61B1EA419350010F9CE /* MMSierraTabStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSierraTabStyle.h; sourceTree = "<group>"; };
 		005DE61C1EA419350010F9CE /* MMSierraTabStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraTabStyle.m; sourceTree = "<group>"; };
+		00B950BC1EAEBC9E00243F2D /* MMSierraOverflow.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MMSierraOverflow.pdf; sourceTree = "<group>"; };
 		00FB622B1EAD6A5800EF54E7 /* MMSierraCloseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSierraCloseButton.h; sourceTree = "<group>"; };
 		00FB622C1EAD6A5800EF54E7 /* MMSierraCloseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraCloseButton.m; sourceTree = "<group>"; };
 		00FB622F1EAD6A6F00EF54E7 /* MMSierraCloseButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSierraCloseButtonCell.h; sourceTree = "<group>"; };
@@ -430,10 +424,7 @@
 		005DE6101EA419350010F9CE /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				005DE6111EA419350010F9CE /* SierraTabClose_Front.png */,
-				005DE6121EA419350010F9CE /* SierraTabClose_Front@2x.png */,
-				005DE6171EA419350010F9CE /* SierraTabNew.png */,
-				005DE6181EA419350010F9CE /* SierraTabNew@2x.png */,
+				00B950BC1EAEBC9E00243F2D /* MMSierraOverflow.pdf */,
 				00FB62331EADB33D00EF54E7 /* SierraTabClose.pdf */,
 			);
 			path = Images;
@@ -896,7 +887,6 @@
 				0634F074160A0C8A00A6C86A /* AquaTabClose_Front_Pressed@2x.png in Resources */,
 				0634F075160A0C8A00A6C86A /* AquaTabClose_Front_Rollover.png in Resources */,
 				0634F076160A0C8A00A6C86A /* AquaTabClose_Front_Rollover@2x.png in Resources */,
-				005DE6231EA419350010F9CE /* SierraTabNew.png in Resources */,
 				0634F077160A0C8A00A6C86A /* AquaTabCloseDirty_Front.png in Resources */,
 				0634F078160A0C8A00A6C86A /* AquaTabCloseDirty_Front_Pressed.png in Resources */,
 				0634F079160A0C8A00A6C86A /* AquaTabCloseDirty_Front_Rollover.png in Resources */,
@@ -904,12 +894,10 @@
 				06C956BC1C984E85000AAF9D /* YosemiteTabClose_Front_Rollover.png in Resources */,
 				0634F07A160A0C8A00A6C86A /* AquaTabNew.png in Resources */,
 				0634F07B160A0C8A00A6C86A /* AquaTabNew@2x.png in Resources */,
-				005DE61E1EA419350010F9CE /* SierraTabClose_Front@2x.png in Resources */,
-				005DE6241EA419350010F9CE /* SierraTabNew@2x.png in Resources */,
 				06C956BA1C984E85000AAF9D /* YosemiteTabClose_Front_Pressed.png in Resources */,
 				0634F07C160A0C8A00A6C86A /* AquaTabNewPressed.png in Resources */,
 				06C956BE1C984E85000AAF9D /* YosemiteTabClose_Front.png in Resources */,
-				005DE61D1EA419350010F9CE /* SierraTabClose_Front.png in Resources */,
+				00B950BD1EAEBC9E00243F2D /* MMSierraOverflow.pdf in Resources */,
 				0634F07D160A0C8A00A6C86A /* AquaTabNewPressed@2x.png in Resources */,
 				0634F07E160A0C8A00A6C86A /* AquaTabNewRollover.png in Resources */,
 				0634F07F160A0C8A00A6C86A /* AquaTabNewRollover@2x.png in Resources */,
