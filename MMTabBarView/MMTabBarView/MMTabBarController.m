@@ -163,12 +163,12 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 				}
             }
             else if (_tabBarView.resizeTabsToFitTotalWidth) {
-                width = availableWidth / (CGFloat)buttonCount;
+                width = MAX (availableWidth / (CGFloat)buttonCount, [_tabBarView buttonMinWidth]);
 			} else {
 				width = [_tabBarView buttonOptimumWidth];
 			}
 
-			width = ceil(width);
+            width = ceil(width);
 
 			//check to see if there is not enough space to place all tabs as preferred
 			if (totalOccupiedWidth + width > availableWidth) {
