@@ -74,11 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)drawInactiveBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
     if (self.mouseHovered) {
-        [[MMSierraRolloverButtonCell inactiveIdleFillColor] set];
-    } else {
         [[MMSierraRolloverButtonCell inactiveHoverFillColor] set];
+    } else {
+        [[MMSierraRolloverButtonCell inactiveIdleFillColor] set];
     }
-    NSFrameRect([self fillRectWithFrame:frame]);
+    NSRectFill([self fillRectWithFrame:frame]);
 
     [[MMSierraRolloverButtonCell inactiveBorderColor] set];
     NSFrameRect([self leftBorderRectWithFrame:frame]);
