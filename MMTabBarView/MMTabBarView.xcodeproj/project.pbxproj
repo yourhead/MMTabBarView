@@ -13,7 +13,8 @@
 		004800521EA80EE50003E9A8 /* MMSierraRolloverButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048004D1EA80D480003E9A8 /* MMSierraRolloverButtonCell.m */; };
 		005DE6271EA419350010F9CE /* MMSierraTabStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 005DE61B1EA419350010F9CE /* MMSierraTabStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		005DE6281EA419350010F9CE /* MMSierraTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 005DE61C1EA419350010F9CE /* MMSierraTabStyle.m */; };
-		00ADF4191EAFD58800C3565C /* MMSierraTabEdited.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 00ADF4181EAFD58800C3565C /* MMSierraTabEdited.tiff */; };
+		00ADF41C1EAFE9F400C3565C /* MMSierraTabEdited.png in Resources */ = {isa = PBXBuildFile; fileRef = 00ADF41A1EAFE9F400C3565C /* MMSierraTabEdited.png */; };
+		00ADF41D1EAFE9F400C3565C /* MMSierraTabEdited@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00ADF41B1EAFE9F400C3565C /* MMSierraTabEdited@2x.png */; };
 		00B950BD1EAEBC9E00243F2D /* MMSierraOverflow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 00B950BC1EAEBC9E00243F2D /* MMSierraOverflow.pdf */; };
 		00FB622D1EAD6A5800EF54E7 /* MMSierraCloseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FB622B1EAD6A5800EF54E7 /* MMSierraCloseButton.h */; };
 		00FB622E1EAD6A5800EF54E7 /* MMSierraCloseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FB622C1EAD6A5800EF54E7 /* MMSierraCloseButton.m */; };
@@ -200,7 +201,8 @@
 		0048004D1EA80D480003E9A8 /* MMSierraRolloverButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraRolloverButtonCell.m; sourceTree = "<group>"; };
 		005DE61B1EA419350010F9CE /* MMSierraTabStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSierraTabStyle.h; sourceTree = "<group>"; };
 		005DE61C1EA419350010F9CE /* MMSierraTabStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraTabStyle.m; sourceTree = "<group>"; };
-		00ADF4181EAFD58800C3565C /* MMSierraTabEdited.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MMSierraTabEdited.tiff; sourceTree = "<group>"; };
+		00ADF41A1EAFE9F400C3565C /* MMSierraTabEdited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MMSierraTabEdited.png; sourceTree = "<group>"; };
+		00ADF41B1EAFE9F400C3565C /* MMSierraTabEdited@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MMSierraTabEdited@2x.png"; sourceTree = "<group>"; };
 		00B950BC1EAEBC9E00243F2D /* MMSierraOverflow.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MMSierraOverflow.pdf; sourceTree = "<group>"; };
 		00FB622B1EAD6A5800EF54E7 /* MMSierraCloseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSierraCloseButton.h; sourceTree = "<group>"; };
 		00FB622C1EAD6A5800EF54E7 /* MMSierraCloseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSierraCloseButton.m; sourceTree = "<group>"; };
@@ -428,7 +430,8 @@
 			children = (
 				00B950BC1EAEBC9E00243F2D /* MMSierraOverflow.pdf */,
 				00FB62331EADB33D00EF54E7 /* MMSierraTabClose.pdf */,
-				00ADF4181EAFD58800C3565C /* MMSierraTabEdited.tiff */,
+				00ADF41A1EAFE9F400C3565C /* MMSierraTabEdited.png */,
+				00ADF41B1EAFE9F400C3565C /* MMSierraTabEdited@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -888,7 +891,6 @@
 				0634F072160A0C8A00A6C86A /* AquaTabClose_Front@2x.png in Resources */,
 				0634F073160A0C8A00A6C86A /* AquaTabClose_Front_Pressed.png in Resources */,
 				0634F074160A0C8A00A6C86A /* AquaTabClose_Front_Pressed@2x.png in Resources */,
-				00ADF4191EAFD58800C3565C /* MMSierraTabEdited.tiff in Resources */,
 				0634F075160A0C8A00A6C86A /* AquaTabClose_Front_Rollover.png in Resources */,
 				0634F076160A0C8A00A6C86A /* AquaTabClose_Front_Rollover@2x.png in Resources */,
 				0634F077160A0C8A00A6C86A /* AquaTabCloseDirty_Front.png in Resources */,
@@ -910,8 +912,10 @@
 				0634F081160A0C8A00A6C86A /* AquaTabsDown.png in Resources */,
 				0634F082160A0C8A00A6C86A /* AquaTabsDownGraphite.png in Resources */,
 				0634F083160A0C8A00A6C86A /* AquaTabsDownNonKey.png in Resources */,
+				00ADF41D1EAFE9F400C3565C /* MMSierraTabEdited@2x.png in Resources */,
 				0634F084160A0C8A00A6C86A /* AquaTabsSeparator.png in Resources */,
 				0634F085160A0C8A00A6C86A /* AquaTabsSeparatorDown.png in Resources */,
+				00ADF41C1EAFE9F400C3565C /* MMSierraTabEdited.png in Resources */,
 				0634F086160A0C8A00A6C86A /* overflowImage.png in Resources */,
 				0634F087160A0C8A00A6C86A /* overflowImage@2x.png in Resources */,
 				0634F088160A0C8A00A6C86A /* overflowImagePressed.png in Resources */,

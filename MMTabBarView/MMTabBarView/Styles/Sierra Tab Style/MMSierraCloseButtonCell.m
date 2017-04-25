@@ -16,8 +16,6 @@
     static NSImage *editedImage = nil;
 
     if (!closeImage) {
-        // FIXME: this tiff image is 9px square. this leads to poor drawing in non-retina. would be
-        // best to provide a pdf image like thoe others
         closeImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"MMSierraTabClose"]];
     }
 
@@ -30,12 +28,10 @@
     MMTabBarButton *tabButton = (MMTabBarButton *)tabButtonView;
 
     NSImage *customImage = nil;
-    NSRect customFrame = NSZeroRect;
+    NSRect customFrame = NSMakeRect(4.0f, 4.0f, 8.0f, 8.0f);
     if (tabButton.isEdited) {
-        customFrame = NSMakeRect(3.5f, 3.5f, 9.0f, 9.0f);
         customImage = editedImage;
     } else {
-        customFrame = NSMakeRect(4.0f, 4.0f, 8.0f, 8.0f);
         customImage = closeImage;
     }
 
