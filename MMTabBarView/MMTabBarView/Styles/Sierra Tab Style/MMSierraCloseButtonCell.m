@@ -7,15 +7,40 @@
 //
 
 #import "MMSierraCloseButtonCell.h"
+#import "MMSierraCloseButton.h"
 
 @implementation MMSierraCloseButtonCell
 
 - (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
-    NSRect customFrame = NSMakeRect(4.0f, 4.0f, 8.0f, 8.0f);
-    NSImage *addImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"SierraTabClose"]];
+    static NSImage *closeImage = nil;
+    static NSImage *editedImage = nil;
+
+    if (!closeImage) {
+        // FIXME: this tiff image is 9px square. this leads to poor drawing in non-retina. would be
+        // best to provide a pdf image like thoe others
+        closeImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"MMSierraTabClose"]];
+    }
+
+    if (!editedImage) {
+        editedImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleForClass:[self class]] pathForImageResource:@"MMSierraTabEdited"]];
+    }
+
+    NSView *tabButtonView = controlView.superview;
+    if (![tabButtonView isKindOfClass:[NSButton class]]) return;
+    MMTabBarButton *tabButton = (MMTabBarButton *)tabButtonView;
+
+    NSImage *customImage = nil;
+    NSRect customFrame = NSZeroRect;
+    if (tabButton.isEdited) {
+        customFrame = NSMakeRect(3.5f, 3.5f, 9.0f, 9.0f);
+        customImage = editedImage;
+    } else {
+        customFrame = NSMakeRect(4.0f, 4.0f, 8.0f, 8.0f);
+        customImage = closeImage;
+    }
+
 
     CGFloat opacity = 1.0f;
-
     if (controlView.window.isKeyWindow || controlView.window.isMainWindow) {
         if (self.isHighlighted) {
             opacity = 0.470f;
@@ -32,7 +57,7 @@
         }
     }
 
-    [addImage drawInRect:customFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:opacity respectFlipped:YES hints:nil];
+    [customImage drawInRect:customFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:opacity respectFlipped:YES hints:nil];
 }
 
 - (NSRect)topBorderRectWithFrame:(NSRect)frame {
