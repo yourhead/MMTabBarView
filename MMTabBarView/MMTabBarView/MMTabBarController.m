@@ -265,9 +265,14 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 					} else {
                     
                         // adjust available width for overflow button
-                        availableWidth -= ([_tabBarView overflowButtonSize].width + kMMTabBarCellPadding);
+
+                        CGFloat overflowPadding = kMMTabBarCellPadding;
+                        if ([_tabBarView.style respondsToSelector:@selector(overflowButtonPaddingForTabBarView:)]) {
+                            overflowPadding = [_tabBarView.style overflowButtonPaddingForTabBarView:_tabBarView];
+                        }
+                        availableWidth -= ([_tabBarView overflowButtonSize].width + overflowPadding);
                         if (![_tabBarView showAddTabButton])
-                            availableWidth -= kMMTabBarCellPadding;
+                            availableWidth -= overflowPadding;
                                                 
 						// stretch - distribute leftover room among buttons, since we can't add this button
 						NSInteger leftoverWidth = availableWidth - totalOccupiedWidth;
@@ -326,10 +331,15 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                     // couldn't fit that last one...
 					} else {
                         // adjust available width for overflow button
-                        availableWidth -= ([_tabBarView overflowButtonSize].width + kMMTabBarCellPadding);
+                        CGFloat overflowPadding = kMMTabBarCellPadding;
+                        if ([_tabBarView.style respondsToSelector:@selector(overflowButtonPaddingForTabBarView:)]) {
+                            overflowPadding = [_tabBarView.style overflowButtonPaddingForTabBarView:_tabBarView];
+                        }
+
+                        availableWidth -= ([_tabBarView overflowButtonSize].width + overflowPadding);
                         if (![_tabBarView showAddTabButton])
-                            availableWidth -= kMMTabBarCellPadding;
-                            
+                            availableWidth -= overflowPadding;
+
                         revisedWidth = availableWidth / i;
                         
                         if (revisedWidth >= [_tabBarView buttonMinWidth]) {
@@ -362,6 +372,34 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                                 }
                             }
                         }
+
+                        NSInteger q = 0;
+                        totalOccupiedWidth = 0;
+                        for (q = 0; q < [newWidths count]; q++) {
+                            [newWidths replaceObjectAtIndex:q withObject:[NSNumber numberWithDouble:revisedWidth]];
+                            totalOccupiedWidth += revisedWidth;
+                        }
+
+                        if (totalOccupiedWidth < availableWidth) {
+                            // when the available width is not divided evenly by totalOccupiedWidth
+                            // there will be a small gap between the addTab-button and the left-most tab
+                            // here we distribute the remainder among the tabs.
+                            // we'll use the same mechanism as above for consistancy
+                            // this will create the least jitter of the separators
+                            while (availableWidth > totalOccupiedWidth) {
+                                for (q=0; ((q < [newWidths count]) && (availableWidth > totalOccupiedWidth)); q++) {
+                                    [newWidths replaceObjectAtIndex:q withObject:[NSNumber numberWithDouble:revisedWidth+1]];
+                                    totalOccupiedWidth ++;
+                                }
+                            }
+
+                            NSInteger tot = 0;
+                            for (NSNumber *newWidth in newWidths) {
+                                tot += newWidth.integerValue;
+                            }
+                            
+                        }
+
                                             
 						break;
 					}

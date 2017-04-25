@@ -113,11 +113,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Working with 'add button'
 
 /**
- *  Get size of tab bar view's 'add button'
+ *  Get padding of tab bar view's 'add button'
  *
  *  @param tabBarView A tab bar view
  *
- *  @return Size of 'add button'
+ *  @return Padding width of 'add button'
  */
 - (CGFloat)addTabButtonPaddingForTabBarView:(MMTabBarView *)tabBarView;
 
@@ -165,6 +165,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return Size of 'overflow button'
  */
 - (NSSize)overflowButtonSizeForTabBarView:(MMTabBarView *)tabBarView;
+
+/**
+ *  Get padding of tab bar view's 'overflow button'
+ *
+ *  @param tabBarView A tab bar view
+ *
+ *  @return Padding width of 'overflow button'
+ */
+- (CGFloat)overflowButtonPaddingForTabBarView:(MMTabBarView *)tabBarView;
 
 /**
  *  Get frame rect of tab bar view's 'overflow button'

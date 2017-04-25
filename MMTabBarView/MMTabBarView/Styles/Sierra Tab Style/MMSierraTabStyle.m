@@ -13,6 +13,7 @@
 #import "NSView+MMTabBarViewExtensions.h"
 #import "NSBezierPath+MMTabBarViewExtensions.h"
 #import "MMOverflowPopUpButton.h"
+#import "MMOverflowPopUpButtonCell.h"
 #import "MMTabBarView.Private.h"
 #import "MMSierraRolloverButton.h"
 #import "MMSierraCloseButton.h"
@@ -80,8 +81,14 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSSize)overflowButtonSizeForTabBarView:(MMTabBarView *)tabBarView {
-    return NSMakeSize(14, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
+    return NSMakeSize(22.0f, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
 }
+
+//- (NSSize)overflowButtonSizeForTabBarView:(MMTabBarView *)tabBarView {
+//    return NSMakeSize(22, [self heightOfTabBarButtonsForTabBarView:tabBarView]);
+//}
+
+
 
 - (NSRect)addTabButtonRectForTabBarView:(MMTabBarView *)tabBarView {
     NSSize tabBarSize = tabBarView.bounds.size;
@@ -165,6 +172,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 #pragma mark Drawing
 
+- (CGFloat)overflowButtonPaddingForTabBarView:(MMTabBarView *)tabBarView {
+    return 0;
+}
+
 - (void)drawTitleOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
     NSRect rect = [cell titleRectForBounds:frame];
     NSAttributedString *attrString = [cell attributedStringValue];
@@ -215,6 +226,11 @@ NS_ASSUME_NONNULL_BEGIN
 
     aButton.image = overflowImage;
     aButton.alternateImage = overflowImage;
+    aButton.autoresizingMask = (NSViewNotSizable);
+    aButton.preferredEdge = 0;
+
+    MMOverflowPopUpButtonCell *cell = aButton.cell;
+    cell.centerImage = YES;
 
 }
 
@@ -266,44 +282,13 @@ NS_ASSUME_NONNULL_BEGIN
 
     // bottom
     rect = [self bottomBorderRectWithFrame:button.frame];
-    if (lastAttachedButton.state == NSOnState) {
+    if ([tabBarView isWindowActive]) {
         [[MMSierraTabStyle bottomBorderGradient] drawInRect:rect angle:90];
     } else {
         [[MMSierraTabStyle inactiveBottomBorderColor] set];
         NSFrameRect(rect);
     }
 
-//
-//    NSWindow *window = [tabBarView window];
-//    NSToolbar *toolbar = [window toolbar];
-//    
-//    NSRect frame = [overflowButton frame];
-//    
-//    if (toolbar && [toolbar isVisible]) {
-//        
-//        NSRect aRect = NSMakeRect(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
-//        aRect.size.width += 5.0;
-////        aRect.origin.y += 1;
-////        aRect.size.height -= 2;
-//        
-//        [self _drawCardBezelInRect:aRect withCapMask:MMBezierShapeRightCap|MMBezierShapeFlippedVertically usingStatesOfAttachedButton:lastAttachedButton ofTabBarView:tabBarView];
-//        
-//    } else {
-//        NSRect aRect = NSMakeRect(frame.origin.x, frame.origin.y+0.5, frame.size.width-0.5f, frame.size.height-1.0);
-//        aRect.size.width += 5.0;
-//        
-//        [self _drawBoxBezelInRect:aRect withCapMask:MMBezierShapeRightCap|MMBezierShapeFlippedVertically usingStatesOfAttachedButton:lastAttachedButton ofTabBarView:tabBarView];
-//        
-//        if ([tabBarView showAddTabButton]) {
-//            
-//            NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
-//            [lineColor set];
-//            [NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(aRect)+.5, NSMinY(aRect)) toPoint:NSMakePoint(NSMaxX(aRect)+0.5, NSMaxY(aRect))];
-//
-//            [[[NSColor whiteColor] colorWithAlphaComponent:0.5] set];
-//            [NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(aRect)+1.5f, NSMinY(aRect)+1.0) toPoint:NSMakePoint(NSMaxX(aRect)+1.5f, NSMaxY(aRect)-1.0)];
-//        }        
-//    }
 }
 
 - (void)drawLeftBezelOfButton:(MMAttachedTabBarButton *)button atIndex:(NSUInteger)index inButtons:(NSArray *)buttons indexOfSelectedButton:(NSUInteger)selIndex tabBarView:(MMTabBarView *)tabBarView {

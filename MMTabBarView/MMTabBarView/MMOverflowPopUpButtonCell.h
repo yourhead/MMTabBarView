@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong) NSImage *image;
 @property (strong) NSImage *secondImage;
 @property (assign) CGFloat secondImageAlpha;
+@property (assign) BOOL centerImage;
 
 - (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView alpha:(CGFloat)alpha;
 

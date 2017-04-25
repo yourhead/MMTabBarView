@@ -134,7 +134,21 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Private Methods
 
 -(NSRect)_imageRectForBounds:(NSRect)theRect forImage:(NSImage *)anImage {
-    
+
+    // for legacy reasons the default behavior is to ignore the image edge behavior
+    // of the button and draw the image on the right edge.
+    // i've introduced a "center image" property so as to avoid causing problems
+    // in other themes.
+    // the correct change would be to override the prefered edge behavior in each
+    // style to correctly position the image then use the default scaling behavior
+    // for a button
+
+    if (self.centerImage) {
+        NSRect centerRect = NSMakeRect(theRect.origin.x + (theRect.size.width - anImage.size.width) / 2.0f, theRect.origin.y + (theRect.size.height - anImage.size.height) / 2.0f, anImage.size.width, anImage.size.height);
+        return NSIntegralRect(centerRect);
+    }
+
+
     // calculate rect
     NSRect drawingRect = [self drawingRectForBounds:theRect];
         
