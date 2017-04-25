@@ -46,6 +46,8 @@ FOUNDATION_EXPORT const unsigned char MMTabBarViewVersionString[];
 #import <MMTabBarView/MMUnifiedTabStyle.h>
 #import <MMTabBarView/MMYosemiteTabStyle.h>
 #import <MMTabBarView/MMSierraTabStyle.h>
+#import <MMTabBarView/MMSierraRolloverButton.h>
+#import <MMTabBarView/MMSierraRolloverButtonCell.h>
 
 #import <MMTabBarView/NSBezierPath+MMTabBarViewExtensions.h>
 #import <MMTabBarView/NSTabViewItem+MMTabBarViewExtensions.h>
