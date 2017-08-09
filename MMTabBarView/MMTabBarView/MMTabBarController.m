@@ -380,7 +380,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                             totalOccupiedWidth += revisedWidth;
                         }
 
-                        if (totalOccupiedWidth < availableWidth) {
+                        if (totalOccupiedWidth < availableWidth && [newWidths count] > 0) {
                             // when the available width is not divided evenly by totalOccupiedWidth
                             // there will be a small gap between the addTab-button and the left-most tab
                             // here we distribute the remainder among the tabs.
